@@ -1,20 +1,21 @@
 import Bar from "@/components/Bar/Bar";
+import CenterBlock from "@/components/CenterBlock/CenterBlock";
 import Navigation from "@/components/Navigation/Navigation";
 import SideBar from "@/components/SideBar/SideBar";
-import CenterBlock from "@/components/CenterBlock/CenterBlock";
-import styles from "./page.module.css"
-import Filters from "@/components/Filters/Filters";
+import styles from "./layout.module.css";
+import { Chilanka } from "next/font/google";
 
-
-export default function Home() {
- 
-
+export default function TrackLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
   return (
     <div className={styles.wrapper}>
       <div className={styles.container}>
         <main className={styles.main}>
           <Navigation />
-      <Filters/>
+         {children}
           <SideBar />
         </main>
         <Bar />
