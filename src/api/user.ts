@@ -1,8 +1,9 @@
 import {SigninFormType} from "@/types"
 
+const apiUrl = "https://webdev-music-003b5b991590.herokuapp.com/user/";
+
 export  async function fetchUser({email, password}: SigninFormType) {
-  const response = await fetch (
-    "https://skypro-music-api.skyeng.tech/user/login/",
+  const response = await fetch (apiUrl + "login/",
     {
       method: "POST",
       body: JSON.stringify({
@@ -25,8 +26,7 @@ export  async function fetchUser({email, password}: SigninFormType) {
 }
 
 export  async function fetchToken({email, password}: SigninFormType) {
-  const response = await fetch (
-    "https://skypro-music-api.skyeng.tech/user/token/",
+  const response = await fetch (apiUrl + "token/",
     {
       method: "POST",
       body: JSON.stringify({
