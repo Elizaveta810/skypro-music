@@ -24,7 +24,7 @@ type PlaylistStateType = {
   };
   filteredTracks: TrackType[];
   initialTracks: TrackType[];
-  likedTracks: number[];
+  likedTracks: TrackType[];
 };
 
 //Начальное состояние
@@ -74,7 +74,7 @@ const playlistSlice = createSlice({
         ? state.shuffledPlaylist
         : state.playlist;
       const currentTrackIndex = playlist.findIndex(
-        (track) => track.id === state.currentTrack?.id
+        (track) => track._id === state.currentTrack?._id
       );
       const newTrack = playlist[currentTrackIndex + 1];
       if (newTrack) {
@@ -86,7 +86,7 @@ const playlistSlice = createSlice({
         ? state.shuffledPlaylist
         : state.playlist;
       const currentTrackIndex = playlist.findIndex(
-        (track) => track.id === state.currentTrack?.id
+        (track) => track._id === state.currentTrack?._id
       );
       const newTrack = playlist[currentTrackIndex - 1];
       if (newTrack) {
@@ -153,16 +153,16 @@ const playlistSlice = createSlice({
       }
       state.filteredTracks = filteredArr;
     },
-    likeTrack: (state, action: PayloadAction<number>) => {
-      if (!state.likedTracks.includes(action.payload))
+    likeTrack: (state, action: PayloadAction<TrackType>) => {
+      if (!state.likedTracks.find((track) => track._id === action.payload._id))
       state.likedTracks.push(action.payload);
     },
-    dislike: (state, action: PayloadAction<number>) => {
+    dislike: (state, action: PayloadAction<TrackType>) => {
       state.likedTracks = state.likedTracks.filter(
-        (id) => id !== action.payload
+        (track) => track._id !== action.payload._id
       );
     },
-    setLikedTracks: (state, action:PayloadAction<number[]>) => {
+    setLikedTracks: (state, action:PayloadAction<TrackType[]>) => {
       state.likedTracks = action.payload
     }
   },
@@ -170,7 +170,7 @@ const playlistSlice = createSlice({
     builder.addCase(
       getFavoriteTracks.fulfilled,
       (state, action:PayloadAction<TrackType[]>) => {
-        state.likedTracks = action.payload.map((track:TrackType) => track.id);
+        state.likedTracks = action.payload;
       }
     );
   },

@@ -1,7 +1,7 @@
 import { ChangeEvent } from "react";
 
 export type userType = {
-  id: number;
+  _id: number;
   username: string;
   first_name: string;
   last_name: string;
@@ -9,7 +9,7 @@ export type userType = {
 };
 
 export type TrackType = {
-  id: number;
+  _id: number;
   name: string;
   author: string;
   release_date: number;

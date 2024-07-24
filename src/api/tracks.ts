@@ -7,13 +7,15 @@ const apiUrPlaylist =
   "https://webdev-music-003b5b991590.herokuapp.com/catalog/selection/";
 
 export async function getTracks() {
-  const res = await fetch(apiUrl + "all/");
+  const response = await fetch(apiUrl + "all/");
 
-  if (!res.ok) {
+  if (!response.ok) {
     throw new Error("Ошибка при получении данных");
   }
 
-  return res.json().data;
+  const data = await response.json();
+
+  return data.data;
 }
 //Функция для получения избранных треков
 export async function fetchFavoritesTracks(access: string) {
@@ -27,16 +29,18 @@ export async function fetchFavoritesTracks(access: string) {
     throw new Error("Ошибка при получении данных");
   }
 
-  return response.json().data;
+  const data = await response.json();
+
+  return data.data;
 }
 
 export async function getPlaylistTracks(id: string) {
-  const res = await fetch(apiUrPlaylist + id);
+  const response = await fetch(apiUrPlaylist + id);
 
-  if (!res.ok) {
+  if (!response.ok) {
     throw new Error("Ошибка при получении данных");
   }
-  const data = await res.json();
+  const data = await response.json();
   return { items: data.items, title: data.name };
 }
 
@@ -49,30 +53,30 @@ export async function getPlaylistTracks(id: string) {
 
 //Поставить лайк
 export async function setLike(token: string, id: number) {
-  const res = await fetch(apiUrl + id + `/favorite/`, {
+  const response = await fetch(apiUrl + id + `/favorite/`, {
     method: "POST",
     headers: {
       Authorization: `Bearer ${token}`,
     },
   });
-  if (!res.ok) {
+  if (!response.ok) {
     throw new Error("Ошибка при получении данных");
   }
-  const data = await res.json();
+  const data = await response.json();
   return data;
 }
 
 //Убрать лайк
 export async function setDislike(token: string, id: number) {
-  const res = await fetch(apiUrl + id + `/favorite/`, {
+  const response = await fetch(apiUrl + id + `/favorite/`, {
     method: "DELETE",
     headers: {
       Authorization: `Bearer ${token}`,
     },
   });
-  if (!res.ok) {
+  if (!response.ok) {
     throw new Error("Ошибка при получении данных");
   }
-  const data = await res.json();
+  const data = await response.json();
   return data;
 }
