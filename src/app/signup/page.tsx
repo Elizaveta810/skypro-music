@@ -13,7 +13,7 @@ export default function SignupPage() {
     email: "",
     username: "",
     password: "",
-    repeatPassword: "",
+    
   });
 
   const handleInputChange = (e: any) => {
@@ -28,7 +28,7 @@ export default function SignupPage() {
     await signup({
       email: signupData.email,
       password: signupData.password,
-      username: signupData.email,
+      username: signupData.username,
     })
       .then((data) => {
         login(data);
@@ -56,8 +56,17 @@ export default function SignupPage() {
               onChange={handleInputChange}
               className={classNames(styles.modalInput, styles.login)}
               type="text"
-              name="username"
+              name="email"
               placeholder="Введите адрес электронной почты."
+              value={signupData.email}
+            />
+            <input
+              onChange={handleInputChange}
+              className={classNames(styles.modalInput, styles.login)}
+              type="text"
+              name="userName"
+              placeholder="Введите имя пользователя."
+              value={signupData.username}
             />
             <input
               onChange={handleInputChange}
@@ -65,14 +74,15 @@ export default function SignupPage() {
               type="password"
               name="password"
               placeholder="Пароль"
+              value={signupData.password}
             />
-            <input
+            {/* <input
               onChange={handleInputChange}
               className={classNames(styles.modalInput, styles.passwordDouble)}
               type="password"
               name="repeatPassword"
               placeholder="Повторите пароль"
-            />
+            /> */}
             <button onClick={handleSignup} className={styles.modalBtnSignupEnt}>
               <Link href="/">Зарегистрироваться</Link>
             </button>

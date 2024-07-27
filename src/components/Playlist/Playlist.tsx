@@ -49,7 +49,7 @@ export default function Playlist({tracks, playlist}:{tracks:TrackType[], playlis
       <div className={styles.contentPlaylist}>
         {tracks?.map((track) => (
           <Track
-          key={track.id} track={track} tracksData={playlist}
+          key={track._id} track={track} tracksData={playlist}
           />
         ))}
       </div>

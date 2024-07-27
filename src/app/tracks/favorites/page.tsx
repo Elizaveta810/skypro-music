@@ -8,6 +8,7 @@ import { getValueFromLocalStorage } from "@/lib/getValueFromLs";
 import { TrackType } from "@/types";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import styles from "./page.module.css";
 
 export default function FavoritesPage() {
   // const [tracksData, setTracksData] = useState<TrackType[]>([]);
@@ -31,7 +32,10 @@ export default function FavoritesPage() {
   // }, [logout, router]);
   return (
     <>
+    <div className={styles.mainCenterblock}>
+    <h2 className={styles.centerblockH2}>Мой плейлист</h2>
       <Playlist tracks={likedTrack} playlist={likedTrack} isFavorite={true} />
+    </div>
     </>
   );
 }

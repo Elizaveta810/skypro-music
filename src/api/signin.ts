@@ -5,7 +5,7 @@ export async function signin({
   email: string;
   password: string;
 }) {
-  const res = await fetch("https://skypro-music-api.skyeng.tech/user/login/", {
+  const res = await fetch("https://webdev-music-003b5b991590.herokuapp.com/user/signup/", {
     method: "POST",
     body: JSON.stringify({
       email: email,
