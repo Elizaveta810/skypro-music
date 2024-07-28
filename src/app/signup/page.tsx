@@ -64,7 +64,7 @@ export default function SignupPage() {
               onChange={handleInputChange}
               className={classNames(styles.modalInput, styles.login)}
               type="text"
-              name="userName"
+              name="username"
               placeholder="Введите имя пользователя."
               value={signupData.username}
             />

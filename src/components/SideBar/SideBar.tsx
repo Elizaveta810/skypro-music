@@ -5,18 +5,24 @@ import Image from "next/image";
 import { useUser } from "@/hooks/useUser";
 import React from "react";
 import { useInitializeLikedTracks } from "@/hooks/likes";
-import { useAppSelector } from "@/hooks";
+import { useAppDispatch, useAppSelector } from "@/hooks";
+import { logout } from "@/store/features/userSlice";
 
 
 export default function SideBar() {
-  const {logout } = useUser();
+  const dispatch = useAppDispatch();
+  // const {logout } = useUser();
   const user = useAppSelector(state => state.auth.user)
   useInitializeLikedTracks()
+
+  const exitLogout =() => {
+    dispatch(logout())
+  }
   return (
     <div className={styles.mainSidebar}>
       {user?.email && (<div className={styles.sidebarPersonal}>
         <p className={styles.sidebarPersonalName}>{user?.email}</p>
-        <div onClick={logout} className={styles.sidebarIcon}>
+        <div onClick={exitLogout} className={styles.sidebarIcon}>
           <svg>
             <use xlinkHref="img/icon/sprite.svg#logout" />
           </svg>

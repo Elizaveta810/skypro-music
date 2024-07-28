@@ -21,7 +21,7 @@ export  async function fetchUser({email, password}: SigninFormType) {
     throw new Error ("Заполните поля");
   }
   const responseData = await response.json();
-  return responseData.data; 
+  return responseData; 
 
 }
 
