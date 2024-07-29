@@ -5,10 +5,10 @@ import { TrackType } from "@/types";
 
 export function useLikeTrack(track: TrackType) {
   const dispatch = useAppDispatch();
-  const user = useAppSelector((state) => state.auth.user);
-  const tokens = useAppSelector((state) => state.auth.tokens);
+  
+  const tokens = useAppSelector((state) => state.auth.userData);
   const likedTrack = useAppSelector((state) => state.playlist.likedTracks);
-  const isLiked = likedTrack.find((t) => t._id === track._id);
+  const isLiked = likedTrack.find((t) => t.id === track.id);
 
   async function handleLike(event:React.MouseEvent) {
    event.stopPropagation()
@@ -19,11 +19,11 @@ export function useLikeTrack(track: TrackType) {
 
    const action = isLiked ? setDislike : setLike
    try {
-    await action (tokens.access, track._id)
+    await action (tokens.access, track.id)
    isLiked ? dispatch(dislike(track)) : dispatch(likeTrack(track))
     
    } catch (error) {
-    console.log (error.message)
+    console.log ("error.message")
     
    }
    

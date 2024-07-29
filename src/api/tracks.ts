@@ -2,21 +2,21 @@
 // const accessToken =
 //   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjkwOTcxMjcxLCJpYXQiOjE2OTA5NjAxMzEsImp0aSI6ImE4YzQ5NDNmOWNmNTRlZjI5NmFmNTMyOWUwODM4YWQ5IiwidXNlcl9pZCI6NzkyfQ.5n8YHTjsgAnYnc4gioyV1wPnxM2D16PS6c9kNhC-JoE";
 
-const apiUrl = "https://webdev-music-003b5b991590.herokuapp.com/catalog/track/";
-const apiUrPlaylist =
-  "https://webdev-music-003b5b991590.herokuapp.com/catalog/selection/";
+const apiUrl = "https://skypro-music-api.skyeng.tech/catalog/track/";
+const apiUrPlaylist = "https://skypro-music-api.skyeng.tech/catalog/selection/";
 
-export async function getTracks() {
-  const response = await fetch(apiUrl + "all/");
+const getTracksUrl = "https://skypro-music-api.skyeng.tech/catalog/track/all/";
 
-  if (!response.ok) {
+export default async function getTracks() {
+  const res = await fetch(getTracksUrl);
+
+  if (!res.ok) {
     throw new Error("Ошибка при получении данных");
   }
 
-  const data = await response.json();
-
-  return data.data;
+  return res.json();
 }
+
 //Функция для получения избранных треков
 export async function fetchFavoritesTracks(access: string) {
   const response = await fetch(apiUrl + "favorite/all/", {

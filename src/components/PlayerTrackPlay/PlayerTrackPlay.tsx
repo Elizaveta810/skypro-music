@@ -12,10 +12,10 @@ type TrackPlayType = {
 
 export default function PlayerTrackPlay({ track }: TrackPlayType) {
   const currentTrack = useAppSelector((state) => state.playlist.currentTrack);
-  const { isLiked, handleLike } = useLikeTrack(currentTrack);
-  const token = useAppSelector((state) => state.auth.tokens);
+  const { isLiked, handleLike } = useLikeTrack(currentTrack!);
+  // const token = useAppSelector((state) => state.auth.tokens);
 
-  const user = useAppSelector((state) => state.auth.user);
+  // const user = useAppSelector((state) => state.auth.user);
   
 
   

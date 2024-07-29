@@ -8,7 +8,7 @@ import { useAppSelector } from "@/hooks";
 
 
 
-export default function Playlist({tracks, playlist}:{tracks:TrackType[], playlist:TrackType[]}) {
+export default function Playlist({tracks, playlist, isFavorite}:{tracks:TrackType[], playlist:TrackType[], isFavorite?:boolean}) {
   //обработка ошибок
   // let tracksData: trackType[];
   // try {
@@ -47,9 +47,9 @@ export default function Playlist({tracks, playlist}:{tracks:TrackType[], playlis
         </div>
       </div>
       <div className={styles.contentPlaylist}>
-        {tracks?.map((track) => (
+        {tracks?.map((track, index) => (
           <Track
-          key={track._id} track={track} tracksData={playlist}
+          key={index} track={track} tracksData={playlist}
           />
         ))}
       </div>

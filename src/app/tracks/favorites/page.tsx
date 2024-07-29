@@ -1,13 +1,9 @@
 "use client";
 
-import { getFavoritesTracks, getPlaylistTracks, getToken } from "@/api/tracks";
 import Playlist from "@/components/Playlist/Playlist";
 import { useAppSelector } from "@/hooks";
 import { useUser } from "@/hooks/useUser";
-import { getValueFromLocalStorage } from "@/lib/getValueFromLs";
-import { TrackType } from "@/types";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
 import styles from "./page.module.css";
 
 export default function FavoritesPage() {

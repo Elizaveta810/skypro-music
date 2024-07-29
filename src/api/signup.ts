@@ -20,8 +20,15 @@ export async function signup({
     },
   });
   if (!res.ok) {
-      throw new Error("Ошибка");
+    if (res.status === 400) {
+        const errorData = await res.json();
+        throw new Error(JSON.stringify(errorData));
+    } else if (res.status === 500) {
+        throw new Error("Сервер сломался");
+    } else {
+        throw new Error("Неизвестная ошибка");
     }
+}
     const data = await res.json();
     return data;
 }

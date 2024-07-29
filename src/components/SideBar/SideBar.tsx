@@ -6,23 +6,26 @@ import { useUser } from "@/hooks/useUser";
 import React from "react";
 import { useInitializeLikedTracks } from "@/hooks/likes";
 import { useAppDispatch, useAppSelector } from "@/hooks";
-import { logout } from "@/store/features/userSlice";
+import { setAuthState, setUserData } from "@/store/features/userSlice";
 
 
 export default function SideBar() {
   const dispatch = useAppDispatch();
-  // const {logout } = useUser();
-  const user = useAppSelector(state => state.auth.user)
+  const logout = () => {
+    dispatch(setAuthState(false));
+    dispatch(setUserData(null));
+    localStorage.removeItem("user");
+    localStorage.removeItem("token");
+};
+  const user = useAppSelector(state => state.auth.userData)
   useInitializeLikedTracks()
 
-  const exitLogout =() => {
-    dispatch(logout())
-  }
+  
   return (
     <div className={styles.mainSidebar}>
       {user?.email && (<div className={styles.sidebarPersonal}>
-        <p className={styles.sidebarPersonalName}>{user?.email}</p>
-        <div onClick={exitLogout} className={styles.sidebarIcon}>
+        <p className={styles.sidebarPersonalName}>{user.email}</p>
+        <div onClick={logout} className={styles.sidebarIcon}>
           <svg>
             <use xlinkHref="img/icon/sprite.svg#logout" />
           </svg>
