@@ -11,6 +11,7 @@ import { setAuthState, setUserData } from "@/store/features/userSlice";
 
 export default function SideBar() {
   const dispatch = useAppDispatch();
+  const authState = useAppSelector((el) => el.auth.authState);
   const logout = () => {
     dispatch(setAuthState(false));
     dispatch(setUserData(null));
@@ -23,7 +24,7 @@ export default function SideBar() {
   
   return (
     <div className={styles.mainSidebar}>
-      {user?.email && (<div className={styles.sidebarPersonal}>
+      {authState && (<div className={styles.sidebarPersonal}>
         <p className={styles.sidebarPersonalName}>{user.email}</p>
         <div onClick={logout} className={styles.sidebarIcon}>
           <svg>
