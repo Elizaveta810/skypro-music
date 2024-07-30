@@ -3,9 +3,11 @@ import { useState } from "react";
 import styles from "./Navigation.module.css";
 import Image from "next/image";
 import Link from "next/link";
+import { useAppSelector } from "@/hooks";
 
 export default function Navigation() {
   const [isOpened, setIsOpened] = useState<boolean>(false); //Кода работаем с состоянием, то указываем тип данных (ситакс. <тип данных>)
+  const authState = useAppSelector((el) => el.auth.authState)
   return (
     <nav className={styles.mainNav}>
       <div className={styles.navLogo}>
@@ -37,9 +39,12 @@ export default function Navigation() {
               </Link>
             </li>
             <li className={styles.menuItem}>
-              <Link  href="/tracks/favorites" className={styles.menuLink}>
+              {authState ? (<Link  href="/tracks/favorites" className={styles.menuLink}>
                 Мой плейлист
-              </Link>
+              </Link>) :
+              (<Link  href="/signin" className={styles.menuLink}>
+                Мой плейлист
+              </Link>)}
             </li>
             <li className={styles.menuItem}>
               <a href="/signin" className={styles.menuLink}>
