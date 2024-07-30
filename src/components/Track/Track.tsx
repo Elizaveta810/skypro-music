@@ -25,7 +25,7 @@ export default function Track({ track, tracksData }: PlaylistType) {
     dispatch(setCurrentTrack({ track, tracksData }));
     dispatch(setIsPlaying(true));
   };
-  console.log(currentTrack);
+  
   return (
     <>
       {currentTrack === track ? (
