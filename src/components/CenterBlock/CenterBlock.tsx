@@ -27,8 +27,7 @@ export default function CenterBlock({
     } else {
       setNewTrackData(filteredTrack);
     }
-    console.log("searchValue:", searchValue, "searchValue length:", searchValue.length);
-    console.log("filteredTrack:", filteredTrack, "+++++++", "tracks:", tracks);
+   
   }, [filteredTrack, searchValue, tracks]);
 
   return (

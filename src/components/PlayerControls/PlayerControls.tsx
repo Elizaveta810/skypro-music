@@ -17,7 +17,7 @@ export default function PlayerControls({
 }: PlayerControlsType) {
   const isShuffle = useAppSelector((state) => state.playlist.isShuffle);
   const dispatch = useAppDispatch();
-  
+
   const HandleNextTrack = () => {
     dispatch(setNextTrack());
     dispatch(setIsPlaying(true));
@@ -33,7 +33,7 @@ export default function PlayerControls({
       dispatch(setIsShuffle(true));
     }
   };
-  return (
+   return (
     <div className={styles.playerControls}>
       <div onClick={HandlePreviousTrack} className={styles.playerBtnPrev}>
         <svg className={styles.playerBtnPrevSvg}>
@@ -72,7 +72,7 @@ export default function PlayerControls({
       >
         <svg className={styles.playerBtnShuffleSvg}>
           <use
-            xlinkHref={`img/icon/sprite.svg#${
+            href={`/img/icon/sprite.svg#${
               isShuffle ? "icon-shuffle-toggled" : "icon-shuffle"
             }`}
           />
