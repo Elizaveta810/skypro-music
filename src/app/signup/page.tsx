@@ -1,11 +1,11 @@
 "use client";
 import Image from "next/image";
-import Link from "next/link";
 import styles from "../signup/page.module.css";
 import classNames from "classnames";
 import { useState } from "react";
 import { signup } from "@/api/signup";
 import { useUser } from "@/hooks/useUser";
+import { useRouter } from "next/navigation";
 
 export default function SignupPage() {
   const { login }: any = useUser();
@@ -13,18 +13,33 @@ export default function SignupPage() {
     email: "",
     username: "",
     password: "",
-    
   });
+  const router = useRouter();
 
-  const handleInputChange = (e: any) => {
-    const { name, value } = e.target;
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    event.preventDefault();
+    const { name, value } = event.target;
+    const cleanedValue = value.replace(/\s+/g, "");
     setSignupData({
       ...signupData,
-      [name]: value,
+      [name]: cleanedValue,
     });
   };
 
-  const handleSignup = async () => {
+  const handleSignup = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (signupData.email === "") {
+      alert("Введите email");
+      return;
+    }
+    if (signupData.password === "") {
+      alert("Введите пароль");
+      return;
+    }
+    if (signupData.username === "") {
+      alert("Введите Имя пользователя");
+      return;
+    }
     await signup({
       email: signupData.email,
       password: signupData.password,
@@ -32,6 +47,7 @@ export default function SignupPage() {
     })
       .then((data) => {
         login(data);
+        router.push("/signin");
       })
       .catch((error) => {
         alert(error);
@@ -41,7 +57,7 @@ export default function SignupPage() {
     <div className={styles.wrapper}>
       <div className={styles.containerSignup}>
         <div className={styles.modalBlock}>
-          <form className={styles.modalFormLogin}>
+          <form onSubmit={handleSignup} className={styles.modalFormLogin}>
             <a href="../">
               <div className={styles.modalLogo}>
                 <Image
@@ -83,8 +99,8 @@ export default function SignupPage() {
               name="repeatPassword"
               placeholder="Повторите пароль"
             /> */}
-            <button onClick={handleSignup} className={styles.modalBtnSignupEnt}>
-              <Link href="/">Зарегистрироваться</Link>
+            <button type="submit" className={styles.modalBtnSignupEnt}>
+              Зарегистрироваться
             </button>
           </form>
         </div>
