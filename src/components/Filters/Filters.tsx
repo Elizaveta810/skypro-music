@@ -32,9 +32,9 @@ export default function Filters() {
   return (
     <div className={styles.centerblockFilter}>
       <div className={styles.filterTitle}>Искать по:</div>
-      {filters.map((filter) => (
+      {filters.map((filter, index) => (
         <FilterItem
-          key={filter.title}
+          key={index}
           list={filterList(filter.title)}
           isOpened={activeFilter === filter.title}
           handleFilterClick={handleFilterClick}

@@ -1,7 +1,6 @@
 import Bar from "@/components/Bar/Bar";
 import Navigation from "@/components/Navigation/Navigation";
 import SideBar from "@/components/SideBar/SideBar";
-import CenterBlock from "@/components/CenterBlock/CenterBlock";
 import styles from "./page.module.css"
 import Filters from "@/components/Filters/Filters";
 

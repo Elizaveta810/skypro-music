@@ -3,9 +3,20 @@ import { useState } from "react";
 import styles from "./Navigation.module.css";
 import Image from "next/image";
 import Link from "next/link";
+import { useAppDispatch, useAppSelector } from "@/hooks";
+import { setAuthState, setUserData } from "@/store/features/userSlice";
 
 export default function Navigation() {
   const [isOpened, setIsOpened] = useState<boolean>(false); //Кода работаем с состоянием, то указываем тип данных (ситакс. <тип данных>)
+  const authState = useAppSelector((el) => el.auth.authState);
+  const dispatch =useAppDispatch();
+  const logout = () => {
+    dispatch(setAuthState(false));
+    dispatch(setUserData(null));
+    localStorage.removeItem("user");
+    localStorage.removeItem("token");
+};
+
   return (
     <nav className={styles.mainNav}>
       <div className={styles.navLogo}>
@@ -37,14 +48,26 @@ export default function Navigation() {
               </Link>
             </li>
             <li className={styles.menuItem}>
-              <a href="#" className={styles.menuLink}>
-                Мой плейлист
-              </a>
+              {authState ? (
+                <Link href="/tracks/favorites" className={styles.menuLink}>
+                  Мой плейлист
+                </Link>
+              ) : (
+                <Link href="/signin" className={styles.menuLink}>
+                  Мой плейлист
+                </Link>
+              )}
             </li>
             <li className={styles.menuItem}>
-              <a href="/signin" className={styles.menuLink}>
-                Войти
-              </a>
+              {authState ? (
+                <div onClick={logout} className={styles.menuLink}>
+                  Выйти
+                </div>
+              ) : (
+                <Link href="/signin" className={styles.menuLink}>
+                  Войти
+                </Link>
+              )}
             </li>
           </ul>
         </div>

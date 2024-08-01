@@ -78,15 +78,18 @@ export default function Bar() {
   const handleSeek = useCallback((event: ChangeEvent<HTMLInputElement>) => {
     if (audioRef.current) {
       audioRef.current.currentTime = Number(event.target.value);
+     
     }
+   
   }, []);
 
   const handleVolume = useCallback((event: ChangeEvent<HTMLInputElement>) => {
     if (audioRef.current) {
+      dispatch (setIsPlaying(true));
       audioRef.current.volume = Number(event.target.value);
       setVolume(audioRef.current.volume);
     }
-  }, []);
+  }, [dispatch]);
 
   return (
     <>
